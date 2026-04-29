@@ -1,0 +1,1 @@
+vless://a9b56b45-7da3-4c01-ab56-c617311440a7@95.85.230.202:15566?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=83ZMcPyXX9pSoEceXG_rb473_Vc4Y-lj8HCGVnyk0hM&security=reality&sid=65a24b5344&sni=www.ya.ru&spx=%2FsUOHuPAqnNaRmXr&type=tcp#tube_vpn-@Muks999-236D,15H%E2%8F%B3
