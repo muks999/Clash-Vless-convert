@@ -1,0 +1,159 @@
+# 🚀 Автообновляемая подписка Clash Verge
+
+Этот репозиторий автоматически конвертирует VLESS конфиги из [zieng2/wl](https://github.com/zieng2/wl) в формат Clash YAML.
+
+## 📥 URL для подписки
+
+После настройки репозитория, используй эту ссылку в Clash Verge:
+
+```
+https://raw.githubusercontent.com/ВАШ_GITHUB_USERNAME/clash-vless-auto/main/clash_config.yaml
+```
+
+Замени `ВАШ_GITHUB_USERNAME` на твой GitHub username!
+
+## ⚙️ Настройка (один раз)
+
+### Шаг 1: Создай GitHub аккаунт
+
+Если у тебя нет GitHub аккаунта:
+1. Иди на https://github.com
+2. Нажми "Sign up"
+3. Создай аккаунт (бесплатно)
+
+### Шаг 2: Создай новый репозиторий
+
+1. Зайди в GitHub
+2. Нажми "+" в правом верхнем углу → "New repository"
+3. **Repository name:** `clash-vless-auto`
+4. **Public** (должен быть публичным!)
+5. ✅ Поставь галочку "Add a README file"
+6. Нажми "Create repository"
+
+### Шаг 3: Загрузи файлы
+
+1. В репозитории нажми "Add file" → "Upload files"
+2. Загрузи эти файлы:
+   - `convert.py`
+   - `.github/workflows/convert.yml`
+3. Нажми "Commit changes"
+
+**Или через Git (если умеешь):**
+```bash
+git clone https://github.com/ВАШ_USERNAME/clash-vless-auto.git
+cd clash-vless-auto
+# Скопируй сюда файлы convert.py и .github/workflows/convert.yml
+git add .
+git commit -m "Initial setup"
+git push
+```
+
+### Шаг 4: Включи GitHub Actions
+
+1. В репозитории перейди на вкладку **"Actions"**
+2. Нажми **"I understand my workflows, go ahead and enable them"**
+3. Нажми на workflow **"Convert VLESS to Clash YAML"**
+4. Нажми **"Run workflow"** → **"Run workflow"**
+5. Подожди 1-2 минуты
+
+### Шаг 5: Проверь что файл создан
+
+1. Вернись на главную страницу репозитория
+2. Должен появиться файл `clash_config.yaml`
+3. Если файла нет — проверь вкладку Actions на ошибки
+
+## 📱 Использование в Clash Verge
+
+### Добавить подписку:
+
+1. Открой **Clash Verge**
+2. **Профили** → кнопка **"+"** справа сверху
+3. **"New"** → **"Import from URL"**
+4. Вставь свою ссылку:
+   ```
+   https://raw.githubusercontent.com/ВАШ_USERNAME/clash-vless-auto/main/clash_config.yaml
+   ```
+5. **Name:** `Auto VLESS` (любое название)
+6. **Update Interval:** `60` (минут) — автообновление каждый час
+7. Нажми **"Save"**
+
+### Активировать:
+
+1. Кликни на профиль **"Auto VLESS"**
+2. Он станет активным
+3. Перейди в **"Прокси"**
+4. Выбери сервер с низким пингом
+
+## 🔄 Автообновление
+
+Конфиги будут автоматически обновляться:
+- **Каждый час** через GitHub Actions
+- **Автоматически в Clash Verge** (по интервалу который ты указал)
+
+## 🛠️ Настройка частоты обновления
+
+Если хочешь чтобы конфиги обновлялись чаще/реже:
+
+1. Открой файл `.github/workflows/convert.yml`
+2. Найди строку `cron: '0 * * * *'`
+3. Измени:
+   - `0 * * * *` = каждый час
+   - `0 */2 * * *` = каждые 2 часа
+   - `0 */6 * * *` = каждые 6 часов
+   - `0 0 * * *` = раз в день (в полночь)
+
+## 📊 Сколько серверов добавляется
+
+По умолчанию добавляются **ВСЕ** серверы из zieng2/wl (обычно 500+).
+
+Если хочешь ограничить количество (чтобы меньше жрало память):
+
+1. Открой `convert.py`
+2. Найди строку `vless_configs.append(params)`
+3. Добавь после неё:
+   ```python
+   if len(vless_configs) >= 100:  # Ограничить до 100
+       break
+   ```
+
+## ❓ Проблемы
+
+### GitHub Actions не запускается
+
+1. Убедись что репозиторий **Public** (не Private)
+2. Проверь что файл `.github/workflows/convert.yml` в правильной папке
+3. Включи Actions: Settings → Actions → Allow all actions
+
+### Файл clash_config.yaml не создаётся
+
+1. Иди в **Actions** → выбери последний workflow
+2. Смотри логи на ошибки
+3. Возможно нужно дать права: Settings → Actions → Workflow permissions → Read and write permissions
+
+### Clash Verge не подключается
+
+1. Проверь что ссылка правильная (замени ВАШ_USERNAME)
+2. Открой ссылку в браузере — должен скачаться YAML файл
+3. Проверь что в Clash Verge указан правильный Update Interval
+
+## 💡 Дополнительно
+
+### Вручную обновить конфиги
+
+1. Иди в репозиторий → **Actions**
+2. Выбери **"Convert VLESS to Clash YAML"**
+3. **"Run workflow"** → **"Run workflow"**
+
+### Посмотреть когда последний раз обновлялись конфиги
+
+1. В репозитории кликни на `clash_config.yaml`
+2. Смотри дату последнего коммита
+
+## 📝 Лицензия
+
+MIT License — делай что хочешь!
+
+## 🙏 Благодарности
+
+- [zieng2/wl](https://github.com/zieng2/wl) — за бесплатные VLESS конфиги
+- Clash Verge — за отличный клиент
